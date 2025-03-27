@@ -1,13 +1,18 @@
 import streamlit as st
 import pandas as pd
-
+import xgboost as xgb
+import pickle
 import numpy as np
 
-# Define input fields for user input
-st.title("Impact Score Prediction App")
+# Load the trained model
+with open("xgboost_model.pkl", "rb") as f:
+    model = pickle.load(f)
+
+# Streamlit UI
+st.title("Climate Impact Score Prediction")
 st.write("Enter environmental data to predict the Impact Score.")
 
-# Create input fields
+# Input fields
 co2 = st.number_input("CO2 Emissions", min_value=0.0, format="%.2f")
 sea_level = st.number_input("Sea Level Rise", min_value=0.0, format="%.2f")
 temperature = st.number_input("Temperature", min_value=-50.0, max_value=60.0, format="%.2f")
