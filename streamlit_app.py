@@ -5,11 +5,21 @@ import pickle
 import numpy as np
 
 
-model = pickle.load(r"https://github.com/medha32/Global_Climate_Change_Predictor/blob/main/xgboostmodel.pkl")  # Windows
+import pickle
+import requests
 
-# Load the trained model
-with open("xgboost_model.pkl", "rb") as f:
+# Download the file from GitHub
+url = "https://github.com/medha32/Global_Climate_Change_Predictor/raw/main/xgboostmodel.pkl"
+response = requests.get(url)
+
+# Save the content to a local file
+with open("xgboostmodel.pkl", "wb") as f:
+    f.write(response.content)
+
+# Now load the model
+with open("xgboostmodel.pkl", "rb") as f:
     model = pickle.load(f)
+
 
 # Streamlit UI
 st.title("Climate Impact Score Prediction")
