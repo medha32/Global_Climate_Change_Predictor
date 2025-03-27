@@ -4,6 +4,9 @@ import xgboost as xgb
 import pickle
 import numpy as np
 
+
+model = pickle.load(r"https://github.com/medha32/Global_Climate_Change_Predictor/blob/main/xgboostmodel.pkl")  # Windows
+
 # Load the trained model
 with open("xgboost_model.pkl", "rb") as f:
     model = pickle.load(f)
