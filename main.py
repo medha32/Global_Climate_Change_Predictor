@@ -8,17 +8,18 @@ import pickle
 def load_model():
     with open("xgboost_model.pkl", "rb") as f:
         return pickle.load(f)
-
-# Define the risk classification function
+        
 def classify_risk(score):
     if score > 75:
         return "High Risk"
-    elif 40 <= score <= 75:
+    elif 50 <= score <= 75:
+        return "Moderate Risk"
+    elif 25 <= score < 50:
         return "Low Risk"
     else:
         return "No Risk"
 
-# Define the Streamlit app
+# Streamlit app
 def main():
     st.title("Climate Impact Prediction App")
     st.write("Enter climate-related parameters to predict the Impact Score and assess climate risk.")
