@@ -2,16 +2,26 @@ import streamlit as st
 import pandas as pd
 import xgboost as xgb
 import numpy as np
-import joblib
+import pickle
 
 # Load the trained model
 def load_model():
-    return joblib.load("xgboost_model.pkl")
+    with open("xgboost_model.pkl", "rb") as f:
+        return pickle.load(f)
+
+# Define the risk classification function
+def classify_risk(score):
+    if score > 75:
+        return "High Risk"
+    elif 40 <= score <= 75:
+        return "Low Risk"
+    else:
+        return "No Risk"
 
 # Define the Streamlit app
 def main():
     st.title("Climate Impact Prediction App")
-    st.write("Enter climate-related parameters to predict the Impact Score.")
+    st.write("Enter climate-related parameters to predict the Impact Score and assess climate risk.")
 
     # Input fields
     temperature = st.number_input("Temperature", value=25.0)
@@ -26,7 +36,9 @@ def main():
     
     if st.button("Predict"):
         prediction = model.predict(features)[0]
+        risk_level = classify_risk(prediction)
         st.write(f"Predicted Impact Score: {prediction:.2f}")
+        st.write(f"Climate Risk Level: {risk_level}")
 
 if __name__ == "__main__":
     main()
