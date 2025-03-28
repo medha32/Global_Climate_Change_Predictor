@@ -8,3 +8,6 @@ This project is a Streamlit-based web application that analyzes climate change i
 Computes a weighted impact score using factors like CO2 emissions, sea level rise, temperature, precipitation, humidity, and wind speed.
 
 Trains an XGBoost regression model to predict the impact score.
+
+# Streamlit App
+# Link : https://globalclimatechangepredictor-muhbkyjfiaqzi8vrphxjma.streamlit.app/
